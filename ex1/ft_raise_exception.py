@@ -4,7 +4,8 @@ def input_temperature(temp_str: str) -> int:
     try:
         temp = int(temp_str)
     except ValueError:
-        raise ValueError(f"invalid literal for int() with base 10: '{temp_str}'")
+        raise ValueError(
+            f"invalid literal for int() with base 10: '{temp_str}'")
 
     if temp > 40:
         raise ValueError(f"{temp}°C is too hot for plants (max 40°C)")

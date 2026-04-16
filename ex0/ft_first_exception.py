@@ -1,83 +1,27 @@
 #! python3
-import sys
+
+def input_temperature(temp_str: str) -> int:
+    return int(temp_str)
 
 
-# ================= INPUT CUSTOM =================
-#! python3
+def test_temperature() -> None:
+    print("=== Garden Temperature ===")
 
-def ft_input(prompt=""):
-    sys.stdout.write(prompt)
-    sys.stdout.flush()
+    test_values = ["52", "abc", "-25", "25a"]
 
-    buffer = []
-
-    while True:
-        char = sys.stdin.read(1)
-
-        if char == '\n':
-            break
-
-        elif char in ('\b', '\x7f'):
-            if buffer:
-                buffer.pop()
-                sys.stdout.write('\b \b')
-                sys.stdout.flush()
-
-        else:
-            buffer.append(char)
-            sys.stdout.write(char)
-            sys.stdout.flush()
-
-    sys.stdout.write('\n')
-    return ''.join(buffer)
-
-
-class Temperature:
-    def __init__(self, temp):
-        self.temp = temp
-        self.error = False
-
-    def set_error(self):
-        self.error = True
-
-    def show(self):
-        print("=== Garden Temperature ===")
-        print()
-
-        if self.error:
-            print(f"Input data is '{self.temp}'")
-            print(f"Caught input_temperature error: invalid literal for int() with base 10: '{self.temp}'")
-            print()
-        else:
-            print(f"Input data is '{self.temp}'")
-            print(f"Temperature is now {self.temp}°C")
+    for data in test_values:
+        try:
+            print(f"Input data is '{data}'")
+            temp = input_temperature(data)
+            print(f"Temperature is now {temp}°C")
             print()
 
-        print ("All tests completed - program didn't crash!")
+        except Exception as temp_error:
+            print(f"Caught input_temperature error: {temp_error}")
+            print()
 
-def ft_first_exception():
-    value = ft_input("Enter a number: ")
-
-    try:
-        temp_value = int(value)
-        t = Temperature(temp_value)
-    except ValueError:
-        t = Temperature(value)
-        t.set_error()
-
-    t.show()
-
-#    value = ft_input("Enter a number: ")
-
- #   try:
- #       temp_value = int(value)
- #       t = Temperature(temp_value)
- #   except ValueError:
- #       t = Temperature(value)
- #       t.set_error()
-
- #   t.show()
+    print("All tests completed - program didn't crash!")
 
 
 if __name__ == "__main__":
-    ft_first_exception()
+    test_temperature()
